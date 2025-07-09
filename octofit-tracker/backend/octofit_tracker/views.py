@@ -8,13 +8,14 @@ from .models import User, Team, Activity, Leaderboard, Workout
 def api_root(request, format=None):
     if request.method == 'POST':
         return Response({"message": "POST request received"}, status=status.HTTP_201_CREATED)
-    base_url = 'http://localhost:8000/'
+    # Usar la URL de Codespace para evitar problemas de HTTPS y permitir acceso desde localhost
+    codespace_url = 'https://cautious-palm-tree-v7rwr677rq6hw54x-8000.app.github.dev/'
     return Response({
-        'users': base_url + 'api/users/?format=api',
-        'teams': base_url + 'api/teams/?format=api',
-        'activities': base_url + 'api/activities/?format=api',
-        'leaderboard': base_url + 'api/leaderboard/?format=api',
-        'workouts': base_url + 'api/workouts/?format=api'
+        'users': codespace_url + 'api/users/?format=api',
+        'teams': codespace_url + 'api/teams/?format=api',
+        'activities': codespace_url + 'api/activities/?format=api',
+        'leaderboard': codespace_url + 'api/leaderboard/?format=api',
+        'workouts': codespace_url + 'api/workouts/?format=api'
     })
 
 class UserViewSet(viewsets.ModelViewSet):
